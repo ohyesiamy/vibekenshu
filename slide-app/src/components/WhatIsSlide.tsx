@@ -4,133 +4,162 @@ import FadeUp from './FadeUp';
 import useIsMobile from '../hooks/useIsMobile';
 
 const flowSteps = [
-  { icon: '💬', label: '自然言語', sub: '日本語で指示', color: 'var(--gold)' },
-  { icon: '🤖', label: 'AI解析', sub: '意図を理解', color: 'var(--cyan)' },
-  { icon: '⚡', label: 'コード生成', sub: '即座に実装', color: 'var(--accent)' },
-  { icon: '🚀', label: '動くアプリ', sub: '数分で完成', color: '#22c55e' },
+  { icon: '💬', label: '自然言語で指示', sub: 'Describe intent', color: 'var(--gold)', glow: 'rgba(240,180,41,0.15)' },
+  { icon: '🤖', label: 'AIが意図を解析', sub: 'Parse & plan', color: 'var(--cyan)', glow: 'rgba(6,182,212,0.15)' },
+  { icon: '⚡', label: 'コードを即座に生成', sub: 'Generate code', color: 'var(--accent)', glow: 'rgba(230,50,50,0.15)' },
+  { icon: '🚀', label: '動くアプリが完成', sub: 'Ship in minutes', color: 'var(--emerald)', glow: 'rgba(16,185,129,0.15)' },
 ];
 
 export default function WhatIsSlide() {
   const m = useIsMobile();
   return (
     <SlideWrapper
-      style={{ background: 'radial-gradient(ellipse at 50% 40%, rgba(0,212,255,0.06) 0%, transparent 60%), #0a0a0a' }}
+      style={{
+        background: 'radial-gradient(ellipse at 30% 60%, rgba(6,182,212,0.06) 0%, transparent 50%), radial-gradient(ellipse at 70% 20%, rgba(240,180,41,0.04) 0%, transparent 50%), var(--bg-primary)',
+      }}
     >
-      <div style={{ width: '100%', maxWidth: 1100, position: 'relative', zIndex: 1 }}>
-        <FadeUp>
-          <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--accent)', letterSpacing: 4, textTransform: 'uppercase', marginBottom: 8 }}>
-            What is Vibe Coding?
-          </div>
-          <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(24px, 4vw, 42px)', fontWeight: 800, letterSpacing: -1 }}>
-            バイブコーディングとは
-          </h2>
-          <p style={{ color: 'var(--text-secondary)', fontSize: m ? 12 : 14, marginTop: 8, maxWidth: 700, lineHeight: 1.7 }}>
-            Andrej Karpathy（元Tesla AI責任者）が2025年に提唱。AIに自然言語で伝えるだけで
-            ソフトウェアを開発する、次世代の開発手法。Collins Dictionary「Word of the Year 2025」に選出。
-          </p>
-        </FadeUp>
+      <div style={{ width: '100%', maxWidth: 1200 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: m ? '1fr' : '1fr 1.1fr', gap: m ? 20 : 60, alignItems: 'center' }}>
+          {/* Left: Definition */}
+          <div>
+            <FadeUp>
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: 10, color: 'var(--cyan)', letterSpacing: 4, textTransform: 'uppercase', marginBottom: 8 }}>
+                Paradigm Shift
+              </div>
+            </FadeUp>
+            <FadeUp delay={0.15}>
+              <h2 style={{ fontFamily: 'var(--font-display)', fontSize: m ? 28 : 'clamp(32px, 4vw, 48px)', fontWeight: 800, letterSpacing: -1 }}>
+                バイブコーディングとは
+              </h2>
+            </FadeUp>
+            <FadeUp delay={0.3}>
+              <p style={{ color: 'var(--text-secondary)', fontSize: m ? 12 : 15, marginTop: 12, lineHeight: 1.8, fontWeight: 300 }}>
+                Andrej Karpathy（元Tesla AI責任者）が2025年に提唱した次世代開発手法。AIに自然言語で「作りたいもの」を伝えるだけでソフトウェアが完成する。
+              </p>
+            </FadeUp>
 
-        {/* Flow Diagram */}
-        <FadeUp delay={0.25}>
-          <div style={{
-            marginTop: m ? 24 : 40,
-            display: 'grid',
-            gridTemplateColumns: m ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)',
-            gap: m ? 12 : 16,
-            justifyItems: 'center',
-          }}>
-            {flowSteps.map((step, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.4 + i * 0.15, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                style={{
-                  width: '100%',
-                  maxWidth: 160,
-                  aspectRatio: '1',
-                  borderRadius: 20,
-                  background: 'var(--bg-card)',
-                  border: `1px solid ${step.color}33`,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: 6,
-                  position: 'relative',
-                }}
-              >
-                <div style={{ fontSize: m ? 28 : 36 }}>{step.icon}</div>
-                <div style={{ fontFamily: 'var(--font-display)', fontSize: m ? 13 : 15, fontWeight: 700, color: step.color }}>
-                  {step.label}
+            <FadeUp delay={0.45}>
+              <div style={{
+                marginTop: m ? 16 : 28, padding: m ? '12px 14px' : '16px 20px',
+                background: 'rgba(6,182,212,0.04)', border: '1px solid rgba(6,182,212,0.15)',
+                borderRadius: 10, display: 'flex', alignItems: 'center', gap: 12,
+              }}>
+                <div style={{ fontSize: m ? 20 : 24, flexShrink: 0 }}>🏆</div>
+                <div>
+                  <div style={{ fontSize: m ? 12 : 14, fontWeight: 700 }}>Collins Dictionary「Word of the Year 2025」</div>
+                  <div style={{ fontSize: m ? 10 : 12, color: 'var(--text-muted)', marginTop: 2 }}>世界が認めたパラダイムシフト</div>
                 </div>
-                <div style={{ fontFamily: 'var(--font-mono)', fontSize: 10, color: 'var(--text-muted)' }}>
-                  {step.sub}
+              </div>
+            </FadeUp>
+
+            {/* Traditional vs Vibe mini comparison */}
+            <FadeUp delay={0.6}>
+              <div style={{ marginTop: m ? 16 : 24, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: m ? 8 : 12 }}>
+                <div style={{
+                  background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 10,
+                  padding: m ? '12px' : '16px', opacity: 0.7,
+                }}>
+                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: 9, color: 'var(--text-muted)', letterSpacing: 2, marginBottom: 8 }}>TRADITIONAL</div>
+                  {['要件定義', '設計書', 'コーディング', 'テスト', 'デバッグ', 'デプロイ'].map((s, i) => (
+                    <div key={i} style={{ fontSize: m ? 10 : 11, color: 'var(--text-muted)', padding: '2px 0' }}>
+                      <span style={{ fontFamily: 'var(--font-mono)', fontSize: 9, marginRight: 6 }}>{i + 1}.</span>{s}
+                    </div>
+                  ))}
+                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: m ? 11 : 12, color: 'var(--accent)', marginTop: 8, fontWeight: 700 }}>2〜4週間</div>
                 </div>
                 <div style={{
-                  position: 'absolute', top: -8, left: -8, width: 22, height: 22, borderRadius: '50%',
-                  background: step.color, display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  fontFamily: 'var(--font-mono)', fontSize: 10, fontWeight: 700, color: '#fff',
+                  background: 'linear-gradient(135deg, rgba(16,185,129,0.06), rgba(6,182,212,0.04))',
+                  border: '1px solid rgba(16,185,129,0.2)', borderRadius: 10,
+                  padding: m ? '12px' : '16px',
                 }}>
-                  {i + 1}
+                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: 9, color: 'var(--emerald)', letterSpacing: 2, marginBottom: 8 }}>VIBE CODING</div>
+                  {[
+                    { text: '意図を伝える', icon: '💬' },
+                    { text: 'AIが生成', icon: '⚡' },
+                    { text: '確認・修正', icon: '👀' },
+                  ].map((s, i) => (
+                    <div key={i} style={{ fontSize: m ? 11 : 12, color: 'var(--text-primary)', padding: '4px 0', fontWeight: 500 }}>
+                      <span style={{ marginRight: 6 }}>{s.icon}</span>{s.text}
+                    </div>
+                  ))}
+                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: m ? 11 : 12, color: 'var(--emerald)', marginTop: 8, fontWeight: 700 }}>2〜3日 (5x)</div>
                 </div>
-              </motion.div>
-            ))}
+              </div>
+            </FadeUp>
           </div>
-        </FadeUp>
 
-        {/* Comparison: Traditional vs Vibe */}
-        <FadeUp delay={0.8}>
-          <div style={{
-            marginTop: m ? 20 : 40,
-            display: 'grid',
-            gridTemplateColumns: m ? '1fr' : '1fr auto 1fr',
-            gap: m ? 12 : 20,
-            alignItems: 'stretch',
-          }}>
+          {/* Right: Flow Diagram */}
+          <FadeUp delay={0.3}>
             <div style={{
-              background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 12,
-              padding: m ? '16px 18px' : '20px 24px', opacity: 0.6,
+              background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 16,
+              padding: m ? '20px' : '32px',
             }}>
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: 10, color: 'var(--text-muted)', letterSpacing: 2, marginBottom: 10 }}>
-                TRADITIONAL
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: 10, color: 'var(--text-muted)', letterSpacing: 2, marginBottom: m ? 16 : 24 }}>
+                HOW IT WORKS
               </div>
-              {['要件定義', '設計書', 'コーディング', 'テスト', 'デバッグ', 'デプロイ'].map((s, i) => (
-                <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '4px 0', fontSize: 12, color: 'var(--text-muted)' }}>
-                  <div style={{ width: 16, height: 16, borderRadius: 4, border: '1px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 8 }}>{i + 1}</div>
-                  {s}
-                </div>
-              ))}
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--accent)', marginTop: 8, fontWeight: 600 }}>2〜4週間</div>
-            </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: m ? 10 : 16 }}>
+                {flowSteps.map((step, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, x: 30 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.6 + i * 0.15, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                    style={{
+                      display: 'flex', alignItems: 'center', gap: m ? 12 : 16,
+                      padding: m ? '12px' : '16px', borderRadius: 10,
+                      background: step.glow, border: `1px solid ${step.color}22`,
+                    }}
+                  >
+                    <div style={{
+                      width: m ? 36 : 44, height: m ? 36 : 44, borderRadius: 10,
+                      background: `${step.color}18`, border: `1px solid ${step.color}33`,
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      fontSize: m ? 18 : 22, flexShrink: 0, position: 'relative',
+                    }}>
+                      {step.icon}
+                      <div style={{
+                        position: 'absolute', top: -6, left: -6, width: 18, height: 18, borderRadius: '50%',
+                        background: step.color, display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        fontFamily: 'var(--font-mono)', fontSize: 9, fontWeight: 700, color: '#fff',
+                      }}>
+                        {i + 1}
+                      </div>
+                    </div>
+                    <div style={{ flex: 1 }}>
+                      <div style={{ fontFamily: 'var(--font-display)', fontSize: m ? 13 : 15, fontWeight: 700, color: step.color }}>
+                        {step.label}
+                      </div>
+                      <div style={{ fontFamily: 'var(--font-mono)', fontSize: 10, color: 'var(--text-muted)' }}>
+                        {step.sub}
+                      </div>
+                    </div>
+                    {i < flowSteps.length - 1 && !m && (
+                      <div style={{ fontFamily: 'var(--font-mono)', fontSize: 14, color: 'var(--text-muted)', opacity: 0.4 }}>↓</div>
+                    )}
+                  </motion.div>
+                ))}
+              </div>
 
-            {!m && (
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <div style={{ fontFamily: 'var(--font-display)', fontSize: 24, fontWeight: 900, color: 'var(--text-muted)', transform: 'rotate(-5deg)' }}>vs</div>
+              {/* Cycle indicator */}
+              <div style={{
+                marginTop: m ? 12 : 16, padding: m ? '10px' : '12px 16px',
+                background: 'rgba(255,255,255,0.02)', borderRadius: 8,
+                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+              }}>
+                <motion.div
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
+                  style={{ fontSize: 14 }}
+                >
+                  🔄
+                </motion.div>
+                <span style={{ fontFamily: 'var(--font-mono)', fontSize: m ? 10 : 11, color: 'var(--text-muted)' }}>
+                  このサイクルが数分で完了
+                </span>
               </div>
-            )}
-
-            <div style={{
-              background: 'linear-gradient(135deg, rgba(230,50,50,0.06), rgba(0,212,255,0.04))',
-              border: '1px solid var(--border-accent)', borderRadius: 12,
-              padding: m ? '16px 18px' : '20px 24px',
-            }}>
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: 10, color: 'var(--accent)', letterSpacing: 2, marginBottom: 10 }}>
-                VIBE CODING
-              </div>
-              {[
-                { text: '意図を伝える', icon: '💬' },
-                { text: 'AIが生成', icon: '⚡' },
-                { text: '確認・修正', icon: '👀' },
-              ].map((s, i) => (
-                <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '7px 0', fontSize: 13, color: 'var(--text-primary)', fontWeight: 500 }}>
-                  <span style={{ fontSize: 16 }}>{s.icon}</span>{s.text}
-                </div>
-              ))}
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: '#22c55e', marginTop: 8, fontWeight: 600 }}>2〜3日 (5x 高速)</div>
             </div>
-          </div>
-        </FadeUp>
+          </FadeUp>
+        </div>
       </div>
     </SlideWrapper>
   );

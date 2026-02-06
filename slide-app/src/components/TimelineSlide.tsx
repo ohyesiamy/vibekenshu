@@ -9,21 +9,24 @@ const steps = [
     title: '無料体験セッション',
     desc: '経営層・技術リード向け2時間デモ。コナミIPを題材にしたライブコーディング。',
     tag: '無料',
-    tagColor: '#22c55e',
+    tagColor: 'var(--emerald)',
+    accentColor: 'var(--emerald)',
   },
   {
     step: '02',
     title: 'パッケージA で実証',
-    desc: '20名のエンジニアで2日間の集中研修。定量的な効果測定。',
+    desc: '20名のエンジニアで2日間の集中研修。定量的な効果測定で投資判断の材料を。',
     tag: '¥370万',
     tagColor: 'var(--text-secondary)',
+    accentColor: 'var(--cyan)',
   },
   {
     step: '03',
     title: 'パッケージB で拡大',
-    desc: '60名規模での組織変革プログラム。3ヶ月のフォローアップで定着化。',
+    desc: '60名規模での組織変革プログラム。3ヶ月のフォローアップで確実に定着化。',
     tag: '¥1,810万',
     tagColor: 'var(--accent)',
+    accentColor: 'var(--accent)',
   },
   {
     step: '04',
@@ -31,107 +34,105 @@ const steps = [
     desc: '年間200名のアカデミー運営。eスポーツ学院連携で次世代人材育成。',
     tag: '¥6,240万',
     tagColor: 'var(--gold)',
+    accentColor: 'var(--gold)',
   },
 ];
 
 export default function TimelineSlide() {
   const m = useIsMobile();
   return (
-    <SlideWrapper style={{ alignItems: 'flex-start' }}>
+    <SlideWrapper style={{
+      background: 'radial-gradient(ellipse at 30% 70%, rgba(16,185,129,0.05) 0%, transparent 50%), var(--bg-primary)',
+    }}>
       <div style={{ width: '100%', maxWidth: 1200 }}>
         <FadeUp>
-          <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--accent)', letterSpacing: 4, textTransform: 'uppercase', marginBottom: 8 }}>
-            Implementation Roadmap
+          <div style={{ fontFamily: 'var(--font-mono)', fontSize: 10, color: 'var(--emerald)', letterSpacing: 4, textTransform: 'uppercase', marginBottom: 8 }}>
+            Low-Friction On-Ramp
           </div>
-          <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(24px, 4vw, 42px)', fontWeight: 800, letterSpacing: -1 }}>
+          <h2 style={{ fontFamily: 'var(--font-display)', fontSize: m ? 28 : 'clamp(32px, 4vw, 48px)', fontWeight: 800, letterSpacing: -1 }}>
             導入ステップ
           </h2>
+          <p style={{ color: 'var(--text-secondary)', fontSize: m ? 12 : 15, marginTop: 8, maxWidth: 700, lineHeight: 1.7, fontWeight: 300 }}>
+            まずは無料体験から。段階的にスケールアップし、リスクを最小化。
+          </p>
         </FadeUp>
 
         <div style={{ position: 'relative', marginTop: m ? 20 : 40 }}>
-          {/* Vertical line */}
+          {/* Vertical gradient line */}
           <motion.div
-            initial={{ scaleY: 0 }}
-            animate={{ scaleY: 1 }}
-            transition={{ duration: 1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            initial={{ scaleY: 0 }} animate={{ scaleY: 1 }}
+            transition={{ duration: 1.2, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
             style={{
-              position: 'absolute',
-              left: m ? 15 : 19,
-              top: 0,
-              bottom: 0,
-              width: 2,
-              background: 'linear-gradient(180deg, var(--accent), var(--gold))',
-              transformOrigin: 'top',
-              opacity: 0.3,
+              position: 'absolute', left: m ? 15 : 19, top: 0, bottom: 0, width: 2,
+              background: 'linear-gradient(180deg, var(--emerald), var(--accent), var(--gold))',
+              transformOrigin: 'top', opacity: 0.4,
             }}
           />
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: m ? 12 : 24 }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: m ? 12 : 20 }}>
             {steps.map((s, i) => (
               <FadeUp key={i} delay={0.3 + i * 0.15}>
                 <div style={{ display: 'flex', gap: m ? 12 : 24, alignItems: 'flex-start' }}>
-                  {/* Circle */}
-                  <div style={{
-                    width: m ? 32 : 40,
-                    height: m ? 32 : 40,
-                    borderRadius: '50%',
-                    background: 'var(--bg-primary)',
-                    border: '2px solid var(--accent)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    fontFamily: 'var(--font-mono)',
-                    fontSize: m ? 10 : 12,
-                    fontWeight: 600,
-                    color: 'var(--accent)',
-                    flexShrink: 0,
-                    position: 'relative',
-                    zIndex: 1,
-                  }}>
+                  {/* Circle node */}
+                  <motion.div
+                    initial={{ scale: 0 }} animate={{ scale: 1 }}
+                    transition={{ delay: 0.5 + i * 0.15, type: 'spring', stiffness: 200 }}
+                    style={{
+                      width: m ? 32 : 40, height: m ? 32 : 40, borderRadius: '50%',
+                      background: 'var(--bg-primary)', border: `2px solid ${s.accentColor}`,
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      fontFamily: 'var(--font-mono)', fontSize: m ? 10 : 12, fontWeight: 600,
+                      color: s.accentColor, flexShrink: 0, position: 'relative', zIndex: 1,
+                    }}
+                  >
                     {s.step}
-                  </div>
+                  </motion.div>
 
-                  {/* Content */}
-                  <div style={{
-                    flex: 1,
-                    background: 'var(--bg-card)',
-                    border: '1px solid var(--border)',
-                    borderRadius: 10,
-                    padding: m ? '12px 14px' : '20px 24px',
-                    display: 'flex',
-                    flexDirection: m ? 'column' : 'row',
-                    justifyContent: 'space-between',
-                    alignItems: m ? 'flex-start' : 'center',
-                    gap: m ? 8 : 0,
-                  }}>
-                    <div>
-                      <h3 style={{ fontFamily: 'var(--font-display)', fontSize: m ? 14 : 18, fontWeight: 700, marginBottom: 4 }}>
+                  {/* Card */}
+                  <motion.div
+                    whileHover={{ borderColor: `${s.accentColor}44` }}
+                    style={{
+                      flex: 1, background: 'var(--bg-card)', border: '1px solid var(--border)',
+                      borderRadius: 12, padding: m ? '12px 14px' : '20px 24px',
+                      display: 'flex', flexDirection: m ? 'column' : 'row',
+                      justifyContent: 'space-between', alignItems: m ? 'flex-start' : 'center',
+                      gap: m ? 8 : 0,
+                    }}
+                  >
+                    <div style={{ flex: 1 }}>
+                      <h3 style={{ fontFamily: 'var(--font-display)', fontSize: m ? 14 : 18, fontWeight: 700, marginBottom: 4, color: s.accentColor }}>
                         {s.title}
                       </h3>
-                      <p style={{ fontSize: m ? 11 : 13, color: 'var(--text-secondary)', lineHeight: 1.6 }}>
-                        {s.desc}
-                      </p>
+                      <p style={{ fontSize: m ? 11 : 13, color: 'var(--text-secondary)', lineHeight: 1.6 }}>{s.desc}</p>
                     </div>
                     <div style={{
-                      fontFamily: 'var(--font-mono)',
-                      fontSize: m ? 11 : 13,
-                      fontWeight: 600,
-                      color: s.tagColor,
-                      padding: m ? '4px 10px' : '6px 14px',
-                      background: 'rgba(255,255,255,0.03)',
-                      border: `1px solid ${s.tagColor}33`,
-                      borderRadius: 6,
-                      whiteSpace: 'nowrap',
-                      marginLeft: m ? 0 : 20,
+                      fontFamily: 'var(--font-mono)', fontSize: m ? 12 : 14, fontWeight: 700,
+                      color: s.tagColor, padding: m ? '4px 12px' : '8px 16px',
+                      background: `${s.accentColor}10`, border: `1px solid ${s.accentColor}33`,
+                      borderRadius: 8, whiteSpace: 'nowrap', marginLeft: m ? 0 : 20,
                     }}>
                       {s.tag}
                     </div>
-                  </div>
+                  </motion.div>
                 </div>
               </FadeUp>
             ))}
           </div>
         </div>
+
+        {/* Small yes cascade note */}
+        <FadeUp delay={1.0}>
+          <div style={{
+            marginTop: m ? 16 : 28, padding: m ? '12px 14px' : '16px 24px',
+            background: 'rgba(16,185,129,0.04)', border: '1px solid rgba(16,185,129,0.15)',
+            borderRadius: 10, display: 'flex', alignItems: 'center', gap: 12,
+          }}>
+            <div style={{ fontSize: m ? 18 : 22, flexShrink: 0 }}>🎯</div>
+            <div style={{ fontSize: m ? 11 : 13, color: 'var(--text-secondary)', lineHeight: 1.6 }}>
+              <strong style={{ color: 'var(--emerald)' }}>リスクゼロ</strong>の無料体験から始めて、効果を確認しながら段階的に拡大。各ステップで成果を測定し、次の投資判断に活用。
+            </div>
+          </div>
+        </FadeUp>
       </div>
     </SlideWrapper>
   );
