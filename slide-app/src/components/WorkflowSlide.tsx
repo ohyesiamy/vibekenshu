@@ -1,6 +1,7 @@
 import { motion } from 'motion/react';
 import SlideWrapper from './SlideWrapper';
 import FadeUp from './FadeUp';
+import useIsMobile from '../hooks/useIsMobile';
 
 const traditionalSteps = [
   { label: '要件定義', duration: '2週間', width: 18 },
@@ -20,14 +21,15 @@ const vibeSteps = [
 ];
 
 export default function WorkflowSlide() {
+  const m = useIsMobile();
   return (
-    <SlideWrapper style={{ alignItems: 'flex-start', padding: '50px 70px' }}>
+    <SlideWrapper style={{ alignItems: 'flex-start' }}>
       <div style={{ width: '100%', maxWidth: 1200 }}>
         <FadeUp>
           <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--accent)', letterSpacing: 4, textTransform: 'uppercase', marginBottom: 8 }}>
             Development Workflow
           </div>
-          <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(28px, 4vw, 42px)', fontWeight: 800, letterSpacing: -1 }}>
+          <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(24px, 4vw, 42px)', fontWeight: 800, letterSpacing: -1 }}>
             開発フローの<span style={{ color: 'var(--accent)' }}>革命</span>
           </h2>
         </FadeUp>
@@ -35,29 +37,29 @@ export default function WorkflowSlide() {
         {/* Traditional Workflow - Gantt-like */}
         <FadeUp delay={0.2}>
           <div style={{
-            marginTop: 28,
+            marginTop: m ? 16 : 28,
             background: 'var(--bg-card)',
             border: '1px solid var(--border)',
             borderRadius: 12,
-            padding: '24px 28px',
+            padding: m ? '16px 14px' : '24px 28px',
             opacity: 0.7,
           }}>
             <div style={{
               display: 'flex',
               justifyContent: 'space-between',
               alignItems: 'center',
-              marginBottom: 16,
+              marginBottom: m ? 10 : 16,
             }}>
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text-muted)', letterSpacing: 2 }}>
-                TRADITIONAL DEVELOPMENT
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: m ? 9 : 11, color: 'var(--text-muted)', letterSpacing: 2 }}>
+                TRADITIONAL
               </div>
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--text-muted)' }}>
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: m ? 10 : 12, color: 'var(--text-muted)' }}>
                 合計: <span style={{ color: 'var(--accent)', fontWeight: 700 }}>10週間</span>
               </div>
             </div>
 
             {/* Gantt bars */}
-            <div style={{ display: 'flex', gap: 3, height: 36, borderRadius: 6, overflow: 'hidden' }}>
+            <div style={{ display: 'flex', gap: m ? 2 : 3, height: m ? 28 : 36, borderRadius: 6, overflow: 'hidden' }}>
               {traditionalSteps.map((step, i) => (
                 <motion.div
                   key={i}
@@ -76,8 +78,8 @@ export default function WorkflowSlide() {
                     border: '1px solid var(--border)',
                   }}
                 >
-                  <div style={{ fontSize: 10, fontWeight: 600, color: 'var(--text-secondary)' }}>{step.label}</div>
-                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: 9, color: 'var(--text-muted)' }}>{step.duration}</div>
+                  <div style={{ fontSize: m ? 7 : 10, fontWeight: 600, color: 'var(--text-secondary)' }}>{m ? step.label.slice(0, 3) : step.label}</div>
+                  {!m && <div style={{ fontFamily: 'var(--font-mono)', fontSize: 9, color: 'var(--text-muted)' }}>{step.duration}</div>}
                 </motion.div>
               ))}
             </div>
@@ -89,7 +91,7 @@ export default function WorkflowSlide() {
               alignItems: 'center',
               marginTop: 8,
               fontFamily: 'var(--font-mono)',
-              fontSize: 10,
+              fontSize: m ? 9 : 10,
               color: 'var(--text-muted)',
               gap: 4,
             }}>
@@ -103,16 +105,16 @@ export default function WorkflowSlide() {
           <div style={{
             display: 'flex',
             alignItems: 'center',
-            gap: 16,
-            margin: '20px 0',
+            gap: m ? 10 : 16,
+            margin: m ? '12px 0' : '20px 0',
           }}>
             <div style={{ flex: 1, height: 1, background: 'var(--border)' }} />
             <div style={{
               fontFamily: 'var(--font-display)',
-              fontSize: 14,
+              fontSize: m ? 12 : 14,
               fontWeight: 800,
               color: 'var(--accent)',
-              padding: '6px 20px',
+              padding: m ? '4px 14px' : '6px 20px',
               border: '1px solid var(--border-accent)',
               borderRadius: 20,
               background: 'var(--accent-soft)',
@@ -129,24 +131,24 @@ export default function WorkflowSlide() {
             background: 'linear-gradient(135deg, rgba(230,50,50,0.06), rgba(0,212,255,0.04))',
             border: '1px solid var(--border-accent)',
             borderRadius: 12,
-            padding: '24px 28px',
+            padding: m ? '16px 14px' : '24px 28px',
           }}>
             <div style={{
               display: 'flex',
               justifyContent: 'space-between',
               alignItems: 'center',
-              marginBottom: 16,
+              marginBottom: m ? 10 : 16,
             }}>
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--accent)', letterSpacing: 2 }}>
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: m ? 9 : 11, color: 'var(--accent)', letterSpacing: 2 }}>
                 VIBE CODING
               </div>
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--text-secondary)' }}>
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: m ? 10 : 12, color: 'var(--text-secondary)' }}>
                 合計: <span style={{ color: '#22c55e', fontWeight: 700 }}>1日</span>
               </div>
             </div>
 
             {/* Circular iterative flow */}
-            <div style={{ display: 'flex', gap: 3, height: 36, borderRadius: 6, overflow: 'hidden' }}>
+            <div style={{ display: 'flex', gap: m ? 2 : 3, height: m ? 28 : 36, borderRadius: 6, overflow: 'hidden' }}>
               {vibeSteps.map((step, i) => (
                 <motion.div
                   key={i}
@@ -165,8 +167,8 @@ export default function WorkflowSlide() {
                     border: `1px solid ${step.color}33`,
                   }}
                 >
-                  <div style={{ fontSize: 10, fontWeight: 600, color: step.color }}>{step.label}</div>
-                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: 9, color: 'var(--text-muted)' }}>{step.duration}</div>
+                  <div style={{ fontSize: m ? 7 : 10, fontWeight: 600, color: step.color }}>{m ? step.label.slice(0, 4) : step.label}</div>
+                  {!m && <div style={{ fontFamily: 'var(--font-mono)', fontSize: 9, color: 'var(--text-muted)' }}>{step.duration}</div>}
                 </motion.div>
               ))}
             </div>
@@ -176,18 +178,18 @@ export default function WorkflowSlide() {
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
-              marginTop: 10,
+              marginTop: m ? 8 : 10,
               gap: 8,
             }}>
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
-                style={{ fontSize: 14 }}
+                style={{ fontSize: m ? 12 : 14 }}
               >
                 🔄
               </motion.div>
-              <span style={{ fontFamily: 'var(--font-mono)', fontSize: 10, color: 'var(--accent)' }}>
-                反復的: 指示 → 生成 → 確認 → 修正 のサイクルを高速回転
+              <span style={{ fontFamily: 'var(--font-mono)', fontSize: m ? 9 : 10, color: 'var(--accent)' }}>
+                {m ? '指示→生成→確認→修正を高速回転' : '反復的: 指示 → 生成 → 確認 → 修正 のサイクルを高速回転'}
               </span>
             </div>
           </div>
@@ -196,29 +198,34 @@ export default function WorkflowSlide() {
         {/* Key insight */}
         <FadeUp delay={1.0}>
           <div style={{
-            marginTop: 20,
+            marginTop: m ? 12 : 20,
             display: 'grid',
-            gridTemplateColumns: 'repeat(3, 1fr)',
-            gap: 12,
+            gridTemplateColumns: m ? '1fr' : 'repeat(3, 1fr)',
+            gap: m ? 8 : 12,
           }}>
             {[
               { icon: '🧠', title: '人間は「何を作るか」に集中', desc: 'ロジックと意思決定に注力' },
               { icon: '🤖', title: 'AIが「どう作るか」を担当', desc: 'コーディング・テスト・デバッグ' },
-              { icon: '🔄', title: '5つのLLMが品質保証', desc: '3つ以上の承認で次工程へ\nトランスコスモス方式' },
+              { icon: '🔄', title: '5つのLLMが品質保証', desc: '3つ以上の承認で次工程へ' },
             ].map((item, i) => (
               <div key={i} style={{
                 background: 'rgba(255,255,255,0.02)',
                 border: '1px solid var(--border)',
                 borderRadius: 10,
-                padding: '16px',
-                textAlign: 'center',
+                padding: m ? '12px 14px' : '16px',
+                textAlign: m ? 'left' : 'center',
+                display: m ? 'flex' : 'block',
+                alignItems: 'center',
+                gap: m ? 12 : 0,
               }}>
-                <div style={{ fontSize: 24, marginBottom: 8 }}>{item.icon}</div>
-                <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text-primary)', marginBottom: 4 }}>
-                  {item.title}
-                </div>
-                <div style={{ fontSize: 11, color: 'var(--text-muted)', lineHeight: 1.5, whiteSpace: 'pre-line' }}>
-                  {item.desc}
+                <div style={{ fontSize: m ? 20 : 24, marginBottom: m ? 0 : 8 }}>{item.icon}</div>
+                <div>
+                  <div style={{ fontSize: m ? 12 : 13, fontWeight: 600, color: 'var(--text-primary)', marginBottom: 2 }}>
+                    {item.title}
+                  </div>
+                  <div style={{ fontSize: m ? 10 : 11, color: 'var(--text-muted)', lineHeight: 1.5 }}>
+                    {item.desc}
+                  </div>
                 </div>
               </div>
             ))}

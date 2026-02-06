@@ -1,8 +1,10 @@
 import { motion } from 'motion/react';
 import SlideWrapper from './SlideWrapper';
 import FadeUp from './FadeUp';
+import useIsMobile from '../hooks/useIsMobile';
 
 export default function SolutionSlide() {
+  const m = useIsMobile();
   return (
     <SlideWrapper
       style={{
@@ -11,7 +13,7 @@ export default function SolutionSlide() {
     >
       <div style={{ textAlign: 'center', maxWidth: 900, position: 'relative', zIndex: 1 }}>
         <FadeUp>
-          <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--accent)', letterSpacing: 4, textTransform: 'uppercase', marginBottom: 16 }}>
+          <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--accent)', letterSpacing: 4, textTransform: 'uppercase', marginBottom: m ? 10 : 16 }}>
             Solution
           </div>
         </FadeUp>
@@ -19,7 +21,7 @@ export default function SolutionSlide() {
         <FadeUp delay={0.2}>
           <h2 style={{
             fontFamily: 'var(--font-display)',
-            fontSize: 'clamp(40px, 6vw, 72px)',
+            fontSize: 'clamp(32px, 6vw, 72px)',
             fontWeight: 900,
             letterSpacing: -2,
             lineHeight: 1.1,
@@ -33,10 +35,10 @@ export default function SolutionSlide() {
 
         <FadeUp delay={0.35}>
           <p style={{
-            fontSize: 18,
+            fontSize: m ? 13 : 18,
             fontWeight: 300,
             color: 'var(--text-secondary)',
-            marginTop: 16,
+            marginTop: m ? 10 : 16,
             lineHeight: 1.7,
           }}>
             AIに自然言語で伝えるだけで、コードが生まれる。<br />
@@ -47,7 +49,7 @@ export default function SolutionSlide() {
         {/* Code demo block */}
         <FadeUp delay={0.5}>
           <div style={{
-            marginTop: 40,
+            marginTop: m ? 24 : 40,
             background: '#0d0d0d',
             border: '1px solid var(--border)',
             borderRadius: 12,
@@ -55,7 +57,7 @@ export default function SolutionSlide() {
             textAlign: 'left',
           }}>
             <div style={{
-              padding: '10px 16px',
+              padding: m ? '8px 12px' : '10px 16px',
               background: 'rgba(255,255,255,0.03)',
               borderBottom: '1px solid var(--border)',
               display: 'flex',
@@ -65,11 +67,11 @@ export default function SolutionSlide() {
               <div style={{ width: 10, height: 10, borderRadius: '50%', background: '#ff5f57' }} />
               <div style={{ width: 10, height: 10, borderRadius: '50%', background: '#febc2e' }} />
               <div style={{ width: 10, height: 10, borderRadius: '50%', background: '#28c840' }} />
-              <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text-muted)', marginLeft: 8 }}>
+              <span style={{ fontFamily: 'var(--font-mono)', fontSize: m ? 9 : 11, color: 'var(--text-muted)', marginLeft: 8 }}>
                 vibe-coding-session.ts
               </span>
             </div>
-            <div style={{ padding: '24px 28px', fontFamily: 'var(--font-mono)', fontSize: 13, lineHeight: 2 }}>
+            <div style={{ padding: m ? '16px 14px' : '24px 28px', fontFamily: 'var(--font-mono)', fontSize: m ? 11 : 13, lineHeight: 2 }}>
               <div>
                 <span style={{ color: 'var(--text-muted)' }}>// Human:</span>
               </div>
@@ -110,17 +112,17 @@ export default function SolutionSlide() {
 
         {/* Stats row */}
         <FadeUp delay={0.7}>
-          <div style={{ display: 'flex', justifyContent: 'center', gap: 48, marginTop: 36 }}>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: m ? 20 : 48, marginTop: m ? 24 : 36 }}>
             {[
               { value: '5x', label: 'プロトタイプ速度' },
               { value: '80%', label: '工数削減' },
               { value: '0', label: '追加採用コスト' },
             ].map((s, i) => (
               <div key={i} style={{ textAlign: 'center' }}>
-                <div style={{ fontFamily: 'var(--font-display)', fontSize: 32, fontWeight: 900, color: 'var(--accent)' }}>
+                <div style={{ fontFamily: 'var(--font-display)', fontSize: m ? 24 : 32, fontWeight: 900, color: 'var(--accent)' }}>
                   {s.value}
                 </div>
-                <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text-muted)', marginTop: 4, letterSpacing: 1 }}>
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: m ? 9 : 11, color: 'var(--text-muted)', marginTop: 4, letterSpacing: 1 }}>
                   {s.label}
                 </div>
               </div>

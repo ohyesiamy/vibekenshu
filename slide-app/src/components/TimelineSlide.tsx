@@ -1,6 +1,7 @@
 import { motion } from 'motion/react';
 import SlideWrapper from './SlideWrapper';
 import FadeUp from './FadeUp';
+import useIsMobile from '../hooks/useIsMobile';
 
 const steps = [
   {
@@ -34,19 +35,20 @@ const steps = [
 ];
 
 export default function TimelineSlide() {
+  const m = useIsMobile();
   return (
-    <SlideWrapper style={{ alignItems: 'flex-start', padding: '50px 70px' }}>
+    <SlideWrapper style={{ alignItems: 'flex-start' }}>
       <div style={{ width: '100%', maxWidth: 1200 }}>
         <FadeUp>
           <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--accent)', letterSpacing: 4, textTransform: 'uppercase', marginBottom: 8 }}>
             Implementation Roadmap
           </div>
-          <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(28px, 4vw, 42px)', fontWeight: 800, letterSpacing: -1 }}>
+          <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(24px, 4vw, 42px)', fontWeight: 800, letterSpacing: -1 }}>
             導入ステップ
           </h2>
         </FadeUp>
 
-        <div style={{ position: 'relative', marginTop: 40 }}>
+        <div style={{ position: 'relative', marginTop: m ? 20 : 40 }}>
           {/* Vertical line */}
           <motion.div
             initial={{ scaleY: 0 }}
@@ -54,7 +56,7 @@ export default function TimelineSlide() {
             transition={{ duration: 1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
             style={{
               position: 'absolute',
-              left: 19,
+              left: m ? 15 : 19,
               top: 0,
               bottom: 0,
               width: 2,
@@ -64,14 +66,14 @@ export default function TimelineSlide() {
             }}
           />
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: m ? 12 : 24 }}>
             {steps.map((s, i) => (
               <FadeUp key={i} delay={0.3 + i * 0.15}>
-                <div style={{ display: 'flex', gap: 24, alignItems: 'flex-start' }}>
+                <div style={{ display: 'flex', gap: m ? 12 : 24, alignItems: 'flex-start' }}>
                   {/* Circle */}
                   <div style={{
-                    width: 40,
-                    height: 40,
+                    width: m ? 32 : 40,
+                    height: m ? 32 : 40,
                     borderRadius: '50%',
                     background: 'var(--bg-primary)',
                     border: '2px solid var(--accent)',
@@ -79,7 +81,7 @@ export default function TimelineSlide() {
                     alignItems: 'center',
                     justifyContent: 'center',
                     fontFamily: 'var(--font-mono)',
-                    fontSize: 12,
+                    fontSize: m ? 10 : 12,
                     fontWeight: 600,
                     color: 'var(--accent)',
                     flexShrink: 0,
@@ -95,30 +97,32 @@ export default function TimelineSlide() {
                     background: 'var(--bg-card)',
                     border: '1px solid var(--border)',
                     borderRadius: 10,
-                    padding: '20px 24px',
+                    padding: m ? '12px 14px' : '20px 24px',
                     display: 'flex',
+                    flexDirection: m ? 'column' : 'row',
                     justifyContent: 'space-between',
-                    alignItems: 'center',
+                    alignItems: m ? 'flex-start' : 'center',
+                    gap: m ? 8 : 0,
                   }}>
                     <div>
-                      <h3 style={{ fontFamily: 'var(--font-display)', fontSize: 18, fontWeight: 700, marginBottom: 4 }}>
+                      <h3 style={{ fontFamily: 'var(--font-display)', fontSize: m ? 14 : 18, fontWeight: 700, marginBottom: 4 }}>
                         {s.title}
                       </h3>
-                      <p style={{ fontSize: 13, color: 'var(--text-secondary)', lineHeight: 1.6 }}>
+                      <p style={{ fontSize: m ? 11 : 13, color: 'var(--text-secondary)', lineHeight: 1.6 }}>
                         {s.desc}
                       </p>
                     </div>
                     <div style={{
                       fontFamily: 'var(--font-mono)',
-                      fontSize: 13,
+                      fontSize: m ? 11 : 13,
                       fontWeight: 600,
                       color: s.tagColor,
-                      padding: '6px 14px',
+                      padding: m ? '4px 10px' : '6px 14px',
                       background: 'rgba(255,255,255,0.03)',
                       border: `1px solid ${s.tagColor}33`,
                       borderRadius: 6,
                       whiteSpace: 'nowrap',
-                      marginLeft: 20,
+                      marginLeft: m ? 0 : 20,
                     }}>
                       {s.tag}
                     </div>

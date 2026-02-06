@@ -1,8 +1,10 @@
 import { motion } from 'motion/react';
 import SlideWrapper from './SlideWrapper';
 import FadeUp from './FadeUp';
+import useIsMobile from '../hooks/useIsMobile';
 
 export default function CoverSlide() {
+  const m = useIsMobile();
   return (
     <SlideWrapper
       style={{
@@ -14,7 +16,7 @@ export default function CoverSlide() {
         position: 'absolute',
         inset: 0,
         backgroundImage: 'linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px)',
-        backgroundSize: '80px 80px',
+        backgroundSize: m ? '40px 40px' : '80px 80px',
         pointerEvents: 'none',
       }} />
 
@@ -39,11 +41,11 @@ export default function CoverSlide() {
         <FadeUp delay={0.1}>
           <div style={{
             fontFamily: 'var(--font-mono)',
-            fontSize: 13,
-            letterSpacing: 6,
+            fontSize: m ? 10 : 13,
+            letterSpacing: m ? 3 : 6,
             color: 'var(--accent)',
             textTransform: 'uppercase',
-            marginBottom: 32,
+            marginBottom: m ? 20 : 32,
           }}>
             Proposal — 2026.02
           </div>
@@ -52,7 +54,7 @@ export default function CoverSlide() {
         <FadeUp delay={0.3}>
           <h1 style={{
             fontFamily: 'var(--font-display)',
-            fontSize: 'clamp(48px, 8vw, 96px)',
+            fontSize: 'clamp(36px, 8vw, 96px)',
             fontWeight: 900,
             lineHeight: 1.05,
             letterSpacing: -2,
@@ -67,11 +69,11 @@ export default function CoverSlide() {
 
         <FadeUp delay={0.5}>
           <p style={{
-            fontSize: 18,
+            fontSize: m ? 14 : 18,
             fontWeight: 300,
             color: 'var(--text-secondary)',
-            marginTop: 24,
-            letterSpacing: 2,
+            marginTop: m ? 16 : 24,
+            letterSpacing: m ? 1 : 2,
           }}>
             AI駆動の次世代開発研修パッケージ
           </p>
@@ -80,17 +82,18 @@ export default function CoverSlide() {
         <FadeUp delay={0.7}>
           <div style={{
             display: 'flex',
-            gap: 24,
+            gap: m ? 8 : 24,
             justifyContent: 'center',
-            marginTop: 48,
+            marginTop: m ? 28 : 48,
+            flexWrap: 'wrap',
           }}>
             {['開発速度 5x', '工数削減 80%', 'ROI 3,100%'].map((text, i) => (
               <div
                 key={i}
                 style={{
                   fontFamily: 'var(--font-mono)',
-                  fontSize: 12,
-                  padding: '8px 20px',
+                  fontSize: m ? 10 : 12,
+                  padding: m ? '6px 12px' : '8px 20px',
                   border: '1px solid var(--border-accent)',
                   borderRadius: 4,
                   color: 'var(--accent)',

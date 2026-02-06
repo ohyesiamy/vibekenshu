@@ -1,6 +1,7 @@
 import { motion } from 'motion/react';
 import SlideWrapper from './SlideWrapper';
 import FadeUp from './FadeUp';
+import useIsMobile from '../hooks/useIsMobile';
 
 const marketGrowth = [
   { year: '2025', value: 2.96, height: 8 },
@@ -33,42 +34,43 @@ const gartnerPredictions = [
 ];
 
 export default function MarketSlide() {
+  const m = useIsMobile();
   return (
-    <SlideWrapper style={{ alignItems: 'flex-start', padding: '50px 70px' }}>
+    <SlideWrapper style={{ alignItems: 'flex-start' }}>
       <div style={{ width: '100%', maxWidth: 1200 }}>
         <FadeUp>
           <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--accent)', letterSpacing: 4, textTransform: 'uppercase', marginBottom: 8 }}>
             Market & Risk
           </div>
-          <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(28px, 4vw, 42px)', fontWeight: 800, letterSpacing: -1 }}>
+          <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(24px, 4vw, 42px)', fontWeight: 800, letterSpacing: -1 }}>
             「やらない」リスク
           </h2>
-          <p style={{ color: 'var(--text-secondary)', fontSize: 14, marginTop: 6, lineHeight: 1.6 }}>
+          <p style={{ color: 'var(--text-secondary)', fontSize: m ? 12 : 14, marginTop: 6, lineHeight: 1.6 }}>
             バイブコーディング市場は年率36.8%で成長。導入しない企業は競争優位を失う。
           </p>
         </FadeUp>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: 24, marginTop: 28 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: m ? '1fr' : '1.2fr 1fr', gap: m ? 12 : 24, marginTop: m ? 16 : 28 }}>
           {/* Left: Market Growth Chart */}
           <FadeUp delay={0.2}>
             <div style={{
               background: 'var(--bg-card)',
               border: '1px solid var(--border)',
               borderRadius: 12,
-              padding: '24px 28px',
+              padding: m ? '16px 14px' : '24px 28px',
             }}>
               <div style={{
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
-                marginBottom: 20,
+                marginBottom: m ? 12 : 20,
               }}>
-                <div style={{ fontFamily: 'var(--font-mono)', fontSize: 10, color: 'var(--text-muted)', letterSpacing: 2 }}>
-                  VIBE CODING MARKET SIZE (USD BILLION)
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: m ? 8 : 10, color: 'var(--text-muted)', letterSpacing: 2 }}>
+                  MARKET SIZE (USD B)
                 </div>
                 <div style={{
                   fontFamily: 'var(--font-mono)',
-                  fontSize: 10,
+                  fontSize: m ? 9 : 10,
                   color: 'var(--accent)',
                   padding: '3px 8px',
                   border: '1px solid var(--border-accent)',
@@ -82,8 +84,8 @@ export default function MarketSlide() {
               <div style={{
                 display: 'flex',
                 alignItems: 'flex-end',
-                gap: 12,
-                height: 180,
+                gap: m ? 6 : 12,
+                height: m ? 120 : 180,
                 borderBottom: '1px solid var(--border)',
                 paddingBottom: 8,
               }}>

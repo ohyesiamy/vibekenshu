@@ -1,5 +1,6 @@
 import SlideWrapper from './SlideWrapper';
 import FadeUp from './FadeUp';
+import useIsMobile from '../hooks/useIsMobile';
 
 const packages = [
   {
@@ -39,26 +40,27 @@ const packages = [
 ];
 
 export default function PackagesSlide() {
+  const m = useIsMobile();
   return (
-    <SlideWrapper style={{ alignItems: 'flex-start', padding: '50px 70px' }}>
+    <SlideWrapper style={{ alignItems: 'flex-start' }}>
       <div style={{ width: '100%', maxWidth: 1200 }}>
         <FadeUp>
           <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--accent)', letterSpacing: 4, textTransform: 'uppercase', marginBottom: 8 }}>
             Packages
           </div>
-          <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(28px, 4vw, 42px)', fontWeight: 800, letterSpacing: -1 }}>
+          <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(24px, 4vw, 42px)', fontWeight: 800, letterSpacing: -1 }}>
             3つのパッケージ
           </h2>
         </FadeUp>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20, marginTop: 32 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: m ? '1fr' : 'repeat(3, 1fr)', gap: m ? 12 : 20, marginTop: m ? 20 : 32 }}>
           {packages.map((pkg, i) => (
             <FadeUp key={i} delay={0.2 + i * 0.15}>
               <div style={{
                 background: pkg.bg,
                 border: `1px solid ${pkg.border}`,
                 borderRadius: 12,
-                padding: '28px 24px',
+                padding: m ? '18px 16px' : '28px 24px',
                 height: '100%',
                 display: 'flex',
                 flexDirection: 'column',
@@ -77,7 +79,7 @@ export default function PackagesSlide() {
                   }} />
                 )}
 
-                <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: m ? 10 : 16 }}>
                   <div style={{
                     fontFamily: 'var(--font-display)',
                     fontSize: 12,
@@ -94,7 +96,7 @@ export default function PackagesSlide() {
                     {pkg.label}
                   </div>
                   <div>
-                    <div style={{ fontFamily: 'var(--font-display)', fontSize: 16, fontWeight: 700 }}>
+                    <div style={{ fontFamily: 'var(--font-display)', fontSize: m ? 14 : 16, fontWeight: 700 }}>
                       {pkg.name}
                     </div>
                     {pkg.recommended && (
@@ -106,12 +108,12 @@ export default function PackagesSlide() {
                 </div>
 
                 <div style={{ display: 'flex', alignItems: 'baseline', gap: 4, marginBottom: 4 }}>
-                  <span style={{ fontFamily: 'var(--font-display)', fontSize: 32, fontWeight: 900, color: '#fff' }}>
+                  <span style={{ fontFamily: 'var(--font-display)', fontSize: m ? 24 : 32, fontWeight: 900, color: '#fff' }}>
                     {pkg.price}
                   </span>
                 </div>
 
-                <div style={{ display: 'flex', gap: 16, fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text-muted)', marginBottom: 20 }}>
+                <div style={{ display: 'flex', gap: 16, fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text-muted)', marginBottom: m ? 12 : 20 }}>
                   <span>{pkg.duration}</span>
                   <span>{pkg.people}</span>
                 </div>
@@ -122,9 +124,9 @@ export default function PackagesSlide() {
                       display: 'flex',
                       alignItems: 'center',
                       gap: 8,
-                      fontSize: 13,
+                      fontSize: m ? 12 : 13,
                       color: 'var(--text-secondary)',
-                      padding: '6px 0',
+                      padding: m ? '4px 0' : '6px 0',
                       borderBottom: j < pkg.features.length - 1 ? '1px solid var(--border)' : 'none',
                     }}>
                       <span style={{ color: pkg.color, fontSize: 11 }}>◆</span>
@@ -139,13 +141,14 @@ export default function PackagesSlide() {
 
         <FadeUp delay={0.8}>
           <div style={{
-            marginTop: 24,
+            marginTop: m ? 12 : 24,
             display: 'flex',
             justifyContent: 'center',
-            gap: 32,
+            gap: m ? 12 : 32,
             fontFamily: 'var(--font-mono)',
-            fontSize: 12,
+            fontSize: m ? 10 : 12,
             color: 'var(--text-muted)',
+            flexWrap: 'wrap',
           }}>
             <span>※ 価格は全て税別</span>
             <span>※ B→C移行時、B投資額の50%を差額充当</span>

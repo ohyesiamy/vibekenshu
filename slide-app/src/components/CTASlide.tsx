@@ -1,8 +1,10 @@
 import { motion } from 'motion/react';
 import SlideWrapper from './SlideWrapper';
 import FadeUp from './FadeUp';
+import useIsMobile from '../hooks/useIsMobile';
 
 export default function CTASlide() {
+  const m = useIsMobile();
   return (
     <SlideWrapper
       style={{
@@ -11,7 +13,7 @@ export default function CTASlide() {
     >
       <div style={{ textAlign: 'center', maxWidth: 700, position: 'relative', zIndex: 1 }}>
         <FadeUp>
-          <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--accent)', letterSpacing: 4, textTransform: 'uppercase', marginBottom: 24 }}>
+          <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--accent)', letterSpacing: 4, textTransform: 'uppercase', marginBottom: m ? 16 : 24 }}>
             Next Step
           </div>
         </FadeUp>
@@ -19,7 +21,7 @@ export default function CTASlide() {
         <FadeUp delay={0.2}>
           <h2 style={{
             fontFamily: 'var(--font-display)',
-            fontSize: 'clamp(36px, 5vw, 64px)',
+            fontSize: 'clamp(28px, 5vw, 64px)',
             fontWeight: 900,
             letterSpacing: -2,
             lineHeight: 1.15,
@@ -30,10 +32,10 @@ export default function CTASlide() {
 
         <FadeUp delay={0.4}>
           <p style={{
-            fontSize: 16,
+            fontSize: m ? 13 : 16,
             fontWeight: 300,
             color: 'var(--text-secondary)',
-            marginTop: 20,
+            marginTop: m ? 14 : 20,
             lineHeight: 1.8,
           }}>
             コナミ様のIPを題材にした2時間の無料デモセッション。<br />
@@ -47,11 +49,11 @@ export default function CTASlide() {
             whileTap={{ scale: 0.98 }}
             style={{
               display: 'inline-block',
-              marginTop: 36,
-              padding: '16px 48px',
+              marginTop: m ? 24 : 36,
+              padding: m ? '12px 32px' : '16px 48px',
               background: 'var(--accent)',
               borderRadius: 8,
-              fontSize: 16,
+              fontSize: m ? 14 : 16,
               fontWeight: 700,
               letterSpacing: 1,
               cursor: 'pointer',
@@ -64,10 +66,10 @@ export default function CTASlide() {
 
         <FadeUp delay={0.75}>
           <div style={{
-            marginTop: 48,
+            marginTop: m ? 28 : 48,
             display: 'grid',
-            gridTemplateColumns: 'repeat(3, 1fr)',
-            gap: 20,
+            gridTemplateColumns: m ? '1fr' : 'repeat(3, 1fr)',
+            gap: m ? 8 : 20,
           }}>
             {[
               { label: '早期契約特典', desc: 'パイロット研修 10%割引' },
@@ -75,7 +77,7 @@ export default function CTASlide() {
               { label: '即決特典', desc: '追加5名分の受講枠' },
             ].map((item, i) => (
               <div key={i} style={{
-                padding: '16px',
+                padding: m ? '12px 14px' : '16px',
                 border: '1px solid var(--border)',
                 borderRadius: 8,
                 background: 'rgba(255,255,255,0.02)',
@@ -83,7 +85,7 @@ export default function CTASlide() {
                 <div style={{ fontFamily: 'var(--font-mono)', fontSize: 10, color: 'var(--gold)', letterSpacing: 2, marginBottom: 6 }}>
                   {item.label}
                 </div>
-                <div style={{ fontSize: 13, color: 'var(--text-secondary)' }}>
+                <div style={{ fontSize: m ? 12 : 13, color: 'var(--text-secondary)' }}>
                   {item.desc}
                 </div>
               </div>
@@ -93,9 +95,9 @@ export default function CTASlide() {
 
         <FadeUp delay={0.9}>
           <div style={{
-            marginTop: 40,
+            marginTop: m ? 24 : 40,
             fontFamily: 'var(--font-mono)',
-            fontSize: 12,
+            fontSize: m ? 10 : 12,
             color: 'var(--text-muted)',
           }}>
             有効期限: 2026年3月31日
