@@ -16,7 +16,7 @@ export default function SlideWrapper({ children, style }: Props) {
         WebkitOverflowScrolling: 'touch',
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'flex-start',
+        justifyContent: 'center',
         alignItems: 'center',
         padding: 'var(--slide-py) var(--slide-px)',
         paddingBottom: 'calc(var(--slide-py) + 56px)',
