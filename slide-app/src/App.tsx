@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
-import { AnimatePresence } from 'motion/react';
+import { AnimatePresence, motion } from 'motion/react';
 import { slides } from './data/slides';
 import useIsMobile from './hooks/useIsMobile';
 import CoverSlide from './components/CoverSlide';
@@ -24,16 +24,40 @@ const slideComponents = [
 
 export default function App() {
   const [current, setCurrent] = useState(0);
+  const [direction, setDirection] = useState(0);
   const total = slides.length;
   const isMobile = useIsMobile();
   const touchRef = useRef<{ x: number; y: number } | null>(null);
 
   const goTo = useCallback((index: number) => {
-    if (index >= 0 && index < total) setCurrent(index);
+    setCurrent((prev) => {
+      if (index >= 0 && index < total && index !== prev) {
+        setDirection(index > prev ? 1 : -1);
+        return index;
+      }
+      return prev;
+    });
   }, [total]);
 
-  const next = useCallback(() => goTo(current + 1), [current, goTo]);
-  const prev = useCallback(() => goTo(current - 1), [current, goTo]);
+  const next = useCallback(() => {
+    setCurrent((prev) => {
+      if (prev < total - 1) {
+        setDirection(1);
+        return prev + 1;
+      }
+      return prev;
+    });
+  }, [total]);
+
+  const prev = useCallback(() => {
+    setCurrent((prev) => {
+      if (prev > 0) {
+        setDirection(-1);
+        return prev - 1;
+      }
+      return prev;
+    });
+  }, []);
 
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
@@ -50,7 +74,6 @@ export default function App() {
     return () => window.removeEventListener('keydown', handleKey);
   }, [next, prev]);
 
-  // Touch swipe support
   const handleTouchStart = useCallback((e: React.TouchEvent) => {
     touchRef.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
   }, []);
@@ -68,14 +91,43 @@ export default function App() {
 
   const CurrentSlide = slideComponents[current];
 
+  const slideVariants = {
+    enter: (dir: number) => ({
+      x: dir > 0 ? '4%' : '-4%',
+      opacity: 0,
+      scale: 0.97,
+    }),
+    center: {
+      x: 0,
+      opacity: 1,
+      scale: 1,
+    },
+    exit: (dir: number) => ({
+      x: dir < 0 ? '4%' : '-4%',
+      opacity: 0,
+      scale: 0.97,
+    }),
+  };
+
   return (
     <div
       style={{ width: '100vw', height: '100vh', position: 'relative', overflow: 'hidden' }}
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
-      <AnimatePresence mode="wait">
-        <CurrentSlide key={current} />
+      <AnimatePresence mode="wait" custom={direction}>
+        <motion.div
+          key={current}
+          custom={direction}
+          variants={slideVariants}
+          initial="enter"
+          animate="center"
+          exit="exit"
+          transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+          style={{ width: '100%', height: '100%', position: 'absolute', inset: 0 }}
+        >
+          <CurrentSlide />
+        </motion.div>
       </AnimatePresence>
 
       {/* Navigation bar */}
@@ -121,7 +173,7 @@ export default function App() {
                   width: i === current ? 20 : 5,
                   height: 5,
                   borderRadius: 3,
-                  background: i === current ? 'var(--accent)' : 'rgba(255,255,255,0.15)',
+                  background: i === current ? 'var(--accent)' : i < current ? 'rgba(230,50,50,0.3)' : 'rgba(255,255,255,0.15)',
                   border: 'none',
                   cursor: 'pointer',
                   transition: 'all 0.3s ease',

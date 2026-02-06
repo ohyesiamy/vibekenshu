@@ -13,7 +13,7 @@ export default function FadeUp({ children, delay = 0, y = 30, style }: Props) {
     <motion.div
       initial={{ opacity: 0, y }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.5, delay: delay * 0.7, ease: [0.22, 1, 0.36, 1] }}
       style={style}
     >
       {children}

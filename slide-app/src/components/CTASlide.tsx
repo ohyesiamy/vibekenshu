@@ -9,6 +9,7 @@ export default function CTASlide() {
     <SlideWrapper
       style={{
         background: 'radial-gradient(ellipse at 50% 50%, rgba(230,50,50,0.12) 0%, transparent 55%), radial-gradient(ellipse at 30% 80%, rgba(240,180,41,0.05) 0%, transparent 40%), var(--bg-primary)',
+        justifyContent: 'center',
       }}
     >
       {/* Grid texture */}
@@ -48,8 +49,8 @@ export default function CTASlide() {
 
         <FadeUp delay={0.6}>
           <motion.div
-            whileHover={{ scale: 1.04, boxShadow: '0 0 50px var(--accent-glow)' }}
-            whileTap={{ scale: 0.97 }}
+            whileHover={{ scale: 1.06, boxShadow: '0 0 60px var(--accent-glow)' }}
+            whileTap={{ scale: 0.95 }}
             animate={{ boxShadow: ['0 0 20px rgba(230,50,50,0.2)', '0 0 40px rgba(230,50,50,0.4)', '0 0 20px rgba(230,50,50,0.2)'] }}
             transition={{ duration: 2, repeat: Infinity }}
             style={{
@@ -76,7 +77,7 @@ export default function CTASlide() {
             ].map((item, i) => (
               <motion.div
                 key={i}
-                whileHover={{ borderColor: `${item.color}44` }}
+                whileHover={{ borderColor: `${item.color}44`, y: -2 }}
                 style={{
                   padding: m ? '14px 16px' : '20px', border: '1px solid var(--border)',
                   borderRadius: 10, background: 'rgba(255,255,255,0.02)',

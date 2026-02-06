@@ -1,5 +1,4 @@
 import { type ReactNode, type CSSProperties } from 'react';
-import { motion } from 'motion/react';
 
 type Props = {
   children: ReactNode;
@@ -8,11 +7,7 @@ type Props = {
 
 export default function SlideWrapper({ children, style }: Props) {
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.5 }}
+    <div
       style={{
         width: '100%',
         height: '100%',
@@ -40,6 +35,6 @@ export default function SlideWrapper({ children, style }: Props) {
         }}
       />
       {children}
-    </motion.div>
+    </div>
   );
 }

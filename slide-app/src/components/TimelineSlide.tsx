@@ -11,6 +11,7 @@ const steps = [
     tag: '無料',
     tagColor: 'var(--emerald)',
     accentColor: 'var(--emerald)',
+    deliverables: ['ライブコーディングデモ', '質疑応答', '導入ロードマップ提案'],
   },
   {
     step: '02',
@@ -19,6 +20,7 @@ const steps = [
     tag: '¥370万',
     tagColor: 'var(--text-secondary)',
     accentColor: 'var(--cyan)',
+    deliverables: ['ハンズオン研修（2日）', 'スキル評価レポート', '推奨拡大プラン'],
   },
   {
     step: '03',
@@ -27,6 +29,7 @@ const steps = [
     tag: '¥1,810万',
     tagColor: 'var(--accent)',
     accentColor: 'var(--accent)',
+    deliverables: ['3日間集中研修', '2ヶ月フォロー', 'ROI計測レポート', 'トレーナー5名認定'],
   },
   {
     step: '04',
@@ -35,6 +38,7 @@ const steps = [
     tag: '¥6,240万',
     tagColor: 'var(--gold)',
     accentColor: 'var(--gold)',
+    deliverables: ['年間16回研修', 'ハッカソン12回', 'eスポーツ学院連携', 'トレーナー20名認定'],
   },
 ];
 
@@ -90,28 +94,48 @@ export default function TimelineSlide() {
 
                   {/* Card */}
                   <motion.div
-                    whileHover={{ borderColor: `${s.accentColor}44` }}
+                    whileHover={{ borderColor: `${s.accentColor}44`, y: -1 }}
                     style={{
                       flex: 1, background: 'var(--bg-card)', border: '1px solid var(--border)',
                       borderRadius: 12, padding: m ? '12px 14px' : '20px 24px',
-                      display: 'flex', flexDirection: m ? 'column' : 'row',
-                      justifyContent: 'space-between', alignItems: m ? 'flex-start' : 'center',
-                      gap: m ? 8 : 0,
                     }}
                   >
-                    <div style={{ flex: 1 }}>
-                      <h3 style={{ fontFamily: 'var(--font-display)', fontSize: m ? 14 : 18, fontWeight: 700, marginBottom: 4, color: s.accentColor }}>
-                        {s.title}
-                      </h3>
-                      <p style={{ fontSize: m ? 11 : 13, color: 'var(--text-secondary)', lineHeight: 1.6 }}>{s.desc}</p>
-                    </div>
                     <div style={{
-                      fontFamily: 'var(--font-mono)', fontSize: m ? 12 : 14, fontWeight: 700,
-                      color: s.tagColor, padding: m ? '4px 12px' : '8px 16px',
-                      background: `${s.accentColor}10`, border: `1px solid ${s.accentColor}33`,
-                      borderRadius: 8, whiteSpace: 'nowrap', marginLeft: m ? 0 : 20,
+                      display: 'flex', flexDirection: m ? 'column' : 'row',
+                      justifyContent: 'space-between', alignItems: m ? 'flex-start' : 'center',
+                      gap: m ? 8 : 0, marginBottom: m ? 8 : 10,
                     }}>
-                      {s.tag}
+                      <div style={{ flex: 1 }}>
+                        <h3 style={{ fontFamily: 'var(--font-display)', fontSize: m ? 14 : 18, fontWeight: 700, marginBottom: 4, color: s.accentColor }}>
+                          {s.title}
+                        </h3>
+                        <p style={{ fontSize: m ? 11 : 13, color: 'var(--text-secondary)', lineHeight: 1.6 }}>{s.desc}</p>
+                      </div>
+                      <div style={{
+                        fontFamily: 'var(--font-mono)', fontSize: m ? 12 : 14, fontWeight: 700,
+                        color: s.tagColor, padding: m ? '4px 12px' : '8px 16px',
+                        background: `${s.accentColor}10`, border: `1px solid ${s.accentColor}33`,
+                        borderRadius: 8, whiteSpace: 'nowrap', marginLeft: m ? 0 : 20,
+                      }}>
+                        {s.tag}
+                      </div>
+                    </div>
+
+                    {/* Deliverables */}
+                    <div style={{
+                      display: 'flex', flexWrap: 'wrap', gap: m ? 4 : 6,
+                      paddingTop: m ? 6 : 8, borderTop: '1px solid var(--border)',
+                    }}>
+                      {s.deliverables.map((d, j) => (
+                        <span key={j} style={{
+                          fontFamily: 'var(--font-mono)', fontSize: m ? 8 : 9,
+                          color: 'var(--text-muted)', padding: '2px 8px',
+                          background: 'rgba(255,255,255,0.02)', borderRadius: 4,
+                          border: '1px solid var(--border)',
+                        }}>
+                          {d}
+                        </span>
+                      ))}
                     </div>
                   </motion.div>
                 </div>

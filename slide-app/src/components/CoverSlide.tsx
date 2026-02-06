@@ -28,15 +28,27 @@ export default function CoverSlide() {
         style={{ position: 'absolute', top: '48%', left: 0, width: '100%', height: 1, background: 'linear-gradient(90deg, transparent 10%, var(--accent) 50%, transparent 90%)', opacity: 0.2, transformOrigin: 'left' }}
       />
 
-      {/* Floating orb */}
+      {/* Floating orb - enhanced */}
       <motion.div
-        animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.5, 0.3] }}
-        transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+        animate={{ scale: [1, 1.15, 1], opacity: [0.25, 0.5, 0.25], x: [0, 20, 0], y: [0, -15, 0] }}
+        transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
         style={{
           position: 'absolute', top: m ? '15%' : '20%', right: m ? '10%' : '15%',
-          width: m ? 120 : 200, height: m ? 120 : 200, borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(230,50,50,0.15), transparent 70%)',
+          width: m ? 120 : 220, height: m ? 120 : 220, borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(230,50,50,0.18), transparent 70%)',
           filter: 'blur(40px)', pointerEvents: 'none',
+        }}
+      />
+
+      {/* Second floating orb */}
+      <motion.div
+        animate={{ scale: [1, 1.1, 1], opacity: [0.15, 0.3, 0.15], x: [0, -15, 0], y: [0, 10, 0] }}
+        transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
+        style={{
+          position: 'absolute', bottom: m ? '20%' : '25%', left: m ? '5%' : '10%',
+          width: m ? 80 : 150, height: m ? 80 : 150, borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(240,180,41,0.15), transparent 70%)',
+          filter: 'blur(30px)', pointerEvents: 'none',
         }}
       />
 
@@ -93,6 +105,7 @@ export default function CoverSlide() {
                 key={i}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
+                whileHover={{ scale: 1.06, borderColor: `rgba(255,255,255,0.15)` }}
                 transition={{ delay: 1.0 + i * 0.15, duration: 0.5 }}
                 style={{
                   padding: m ? '10px 16px' : '14px 28px',
@@ -100,6 +113,7 @@ export default function CoverSlide() {
                   border: '1px solid rgba(255,255,255,0.08)',
                   borderRadius: 8, backdropFilter: 'blur(10px)',
                   display: 'flex', alignItems: 'center', gap: m ? 8 : 12,
+                  cursor: 'default',
                 }}
               >
                 <span style={{ fontFamily: 'var(--font-display)', fontSize: m ? 18 : 24, fontWeight: 800, color: item.color }}>

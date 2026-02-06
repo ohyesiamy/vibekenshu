@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { motion } from 'motion/react';
 import SlideWrapper from './SlideWrapper';
 import FadeUp from './FadeUp';
@@ -16,6 +17,7 @@ const packages = [
     color: 'var(--gold)',
     bg: 'linear-gradient(135deg, rgba(240,180,41,0.06), rgba(240,180,41,0.01))',
     border: 'rgba(240,180,41,0.2)',
+    details: '年間200名のアカデミー運営。組織全体にバイブコーディング文化を定着させ、採用・育成コストを劇的に削減。eスポーツ学院との連携で次世代人材パイプラインを構築。',
   },
   {
     name: 'Vibe Transformation',
@@ -30,6 +32,7 @@ const packages = [
     color: 'var(--accent)',
     bg: 'linear-gradient(135deg, rgba(230,50,50,0.08), rgba(230,50,50,0.02))',
     border: 'var(--border-accent)',
+    details: '60名規模での組織変革プログラム。3日間の集中研修＋2ヶ月のフォローアップで確実に定着化。ROI計測レポートで次の投資判断の材料を提供。',
   },
   {
     name: 'Vibe Sprint',
@@ -43,11 +46,14 @@ const packages = [
     color: 'var(--text-secondary)',
     bg: 'var(--bg-card)',
     border: 'var(--border)',
+    details: '20名のエンジニアで2日間の集中研修。コナミIPを題材にしたハンズオンでバイブコーディングを即座に体験・習得。',
   },
 ];
 
 export default function PackagesSlide() {
   const m = useIsMobile();
+  const [expanded, setExpanded] = useState<number | null>(null);
+
   return (
     <SlideWrapper style={{
       background: 'radial-gradient(ellipse at 50% 30%, rgba(230,50,50,0.06) 0%, transparent 50%), var(--bg-primary)',
@@ -71,11 +77,13 @@ export default function PackagesSlide() {
               <motion.div
                 whileHover={pkg.recommended ? { y: -4, boxShadow: '0 12px 40px rgba(230,50,50,0.15)' } : { y: -2 }}
                 transition={{ duration: 0.2 }}
+                onClick={() => setExpanded(expanded === i ? null : i)}
                 style={{
                   background: pkg.bg, border: `1px solid ${pkg.border}`, borderRadius: 14,
                   padding: m ? '18px 16px' : '28px 24px', height: '100%',
                   display: 'flex', flexDirection: 'column', position: 'relative',
                   transform: pkg.recommended && !m ? 'scale(1.03)' : undefined,
+                  cursor: 'pointer',
                 }}
               >
                 {/* Top accent bar */}
@@ -127,6 +135,31 @@ export default function PackagesSlide() {
                       <span style={{ color: pkg.color, fontSize: 10 }}>◆</span>{f}
                     </div>
                   ))}
+                </div>
+
+                {/* Expandable details */}
+                <motion.div
+                  initial={false}
+                  animate={{ height: expanded === i ? 'auto' : 0, opacity: expanded === i ? 1 : 0, marginTop: expanded === i ? 12 : 0 }}
+                  transition={{ duration: 0.3 }}
+                  style={{ overflow: 'hidden' }}
+                >
+                  <div style={{
+                    padding: m ? '10px 12px' : '14px 16px',
+                    background: 'rgba(255,255,255,0.02)',
+                    borderRadius: 8, border: '1px solid var(--border)',
+                    fontSize: m ? 11 : 12, color: 'var(--text-secondary)', lineHeight: 1.7,
+                  }}>
+                    {pkg.details}
+                  </div>
+                </motion.div>
+
+                {/* Expand indicator */}
+                <div style={{
+                  marginTop: 8, textAlign: 'center',
+                  fontFamily: 'var(--font-mono)', fontSize: 9, color: 'var(--text-muted)',
+                }}>
+                  {expanded === i ? '▲ 閉じる' : '▼ 詳細を見る'}
                 </div>
               </motion.div>
             </FadeUp>
