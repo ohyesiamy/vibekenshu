@@ -4,10 +4,14 @@ import { slides } from './data/slides';
 import CoverSlide from './components/CoverSlide';
 import StatsSlide from './components/StatsSlide';
 import ProblemSlide from './components/ProblemSlide';
+import WhatIsSlide from './components/WhatIsSlide';
 import SolutionSlide from './components/SolutionSlide';
+import EvidenceSlide from './components/EvidenceSlide';
+import WorkflowSlide from './components/WorkflowSlide';
+import ComparisonSlide from './components/ComparisonSlide';
+import MarketSlide from './components/MarketSlide';
 import PackagesSlide from './components/PackagesSlide';
 import ROISlide from './components/ROISlide';
-import ComparisonSlide from './components/ComparisonSlide';
 import TimelineSlide from './components/TimelineSlide';
 import CTASlide from './components/CTASlide';
 
@@ -15,10 +19,14 @@ const slideComponents = [
   CoverSlide,
   StatsSlide,
   ProblemSlide,
+  WhatIsSlide,
   SolutionSlide,
+  EvidenceSlide,
+  WorkflowSlide,
+  ComparisonSlide,
+  MarketSlide,
   PackagesSlide,
   ROISlide,
-  ComparisonSlide,
   TimelineSlide,
   CTASlide,
 ];
@@ -89,14 +97,14 @@ export default function App() {
         </div>
 
         {/* Center: progress dots */}
-        <div style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
+        <div style={{ display: 'flex', gap: 4, alignItems: 'center' }}>
           {slides.map((_, i) => (
             <button
               key={i}
               onClick={() => goTo(i)}
               style={{
-                width: i === current ? 24 : 6,
-                height: 6,
+                width: i === current ? 20 : 5,
+                height: 5,
                 borderRadius: 3,
                 background: i === current ? 'var(--accent)' : 'rgba(255,255,255,0.15)',
                 border: 'none',
